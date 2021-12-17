@@ -1,0 +1,56 @@
+﻿@model Musical_Instrument_Store.ViewModels.LoginViewModel;
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-lg" style="border-radius: 1rem;">
+                <div class="card-body p-5">
+
+                    <h2 class="text-center mb-5">LOGIN</h2>
+                    <form method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group mb-4">
+                            <label asp-for="Email">Email:</label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="Password">Password:</label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group d-flex mb-4">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input asp-for="RememberMe" type="checkbox" class="custom-control-input">
+                                    <label class="custom-control-label" asp-for="RememberMe">@Html.DisplayNameFor(m => m.RememberMe)</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-secondary" type="submit">Login</button>
+                        </div>
+
+
+                        <hr class="my-4">
+                        <div>
+                            <p class="mb-0">Don't have an account? <a class="text-dark" asp-area="" asp-controller="Account" asp-action="Register" style="color:darkgrey"> Register</a></p>
+                        </div>
+                    </form>
+                        
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

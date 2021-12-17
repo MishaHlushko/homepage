@@ -1,0 +1,81 @@
+﻿@model Musical_Instrument_Store.ViewModels.MusicalInstrumentViewModel
+
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-danger">
+        <strong>Error !</strong> @TempData["AlertMessage"]
+    </div>
+}
+
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-lg">
+                <div class="card-body p-4">
+                    <h2 class="h4 text-center">Додати товар</h2>
+                    <form method="post" class="form-sample" asp-controller="MusicalInstrument" asp-action="Create" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <div class="form-group">
+                            <label asp-for="nameMI">Назва:</label>
+                            <div>
+                                <input asp-for="nameMI" type="text" class="form-control" />
+                                <span asp-validation-for="nameMI"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="descMI">Опис:</label>
+                            <div>
+                                <input asp-for="descMI" type="text" class="form-control" />
+                                <span asp-validation-for="descMI"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="quantity">Кількість:</label>
+                            <div>
+                                <input asp-for="quantity" type="number" class="form-control" />
+                                <span asp-validation-for="quantity"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="price">Ціна:</label>
+                            <div>
+                                <input asp-for="price" type="number" class="form-control" />
+                                <span asp-validation-for="price"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="categoryId">Категорія:</label>
+                            <div>
+                                @Html.DropDownListFor(x => Model.categoryId, new SelectList(Model.categories, "Value", "Text"), htmlAttributes: new { @class = "form-control form-control-sm text-dark" })
+                                <span asp-validation-for="categoryId"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="img">Зображення:</label>
+                            <div>
+                                <input type="file" name="uploadedImage" class="form-control" />
+                                <span asp-validation-for="img"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="d-grid gap-2 mt-3">
+                            <button type="submit" class="btn btn-secondary"><i class="mdi mdi-plus-box"></i> Добавити</button>
+                            <a class="btn btn-light" href="/MusicalInstrument/Index"><i class="mdi mdi-close-circle"></i></i>Скасувати</a>
+                        </div>
+                    </form>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

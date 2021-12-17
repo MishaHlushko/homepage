@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+
+
+
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-lg">
+                <div class="card-body p-4">
+                    <h2 class="h4 text-center">Список користувачів</h2>
+                    <table class="table">
+                        @foreach (var user in Model)
+                        {
+                            <tr class="d-flex">
+                                <td class="col-7">@user.Email</td>
+                                <td class="col-5">
+
+                                    <a class="btn btn-sm btn-secondary" asp-action="Edit" asp-route-userid="@user.Id"><i class="mdi mdi-shield-account"></i> Права доступу</a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>

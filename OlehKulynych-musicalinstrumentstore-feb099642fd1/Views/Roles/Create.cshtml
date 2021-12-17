@@ -1,0 +1,27 @@
+﻿
+
+
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-lg">
+                <div class="card-body p-4">
+                    <h2 class="h4 text-center">Додати роль</h2>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <form asp-action="Create" method="post">
+                        <div class="form-group">
+                            <label for="name" class="mb-2">Нова роль</label>
+                            <input name="name" class="form-control mb-4" />
+                        </div>
+                        <button type="submit" class="btn btn-secondary"><i class="mdi mdi-plus-box"></i> Добавити</button>
+                    </form>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,153 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/css/style-loader.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/style-sidebar.css" rel="stylesheet" type="text/css">
+    <link href="~/css/MusicalInstrument/musicalinstrumentlist.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="~/lib/template/vendors/mdi/css/materialdesignicons.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+    <div class="loader">
+        <div></div>
+    </div>
+   
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper" class="shadow-sm">
+            <ul class="sidebar-nav dropdown">
+                <li class="sidebar-brand mb-5 ">
+                    <a asp-controller="Home" asp-action="Index"> <img src="~/img/MainImg/Logo.png" alt="Mentor's Musical Store" width="160" height="105" /></a>
+
+                </li>
+                <hr class="m-4">
+                <li>
+                    <a class="effect-underline" asp-controller="MusicalInstrument" asp-action="Index"><i class="mdi mdi-folder-multiple"></i>     Каталог</a>
+                </li>
+                <li>
+                    <a class="effect-underline" asp-controller="Cart" asp-action="Index"><i class="mdi mdi-cart-outline"> </i>    Корзина</a>
+                </li>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        <a class="effect-underline" asp-controller="Order" asp-action="UserOrder" asp-route-userId="@((await UserManager.GetUserAsync(User)).Id)"><i class="mdi mdi-archive"></i> Минулі замовлення</a>
+                    </li>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+
+                        <li class="dropdown-btn">
+                            <a class="effect-underline" href="#"><i class="mdi mdi-account-supervisor-circle"> </i>   Admin</a>
+                            <i class="fa fa-caret-down"></i>
+                        </li>
+                        <ul class=" dropdown-container">
+                            <li><a class="effect-underline" asp-controller="Order" asp-action="AllOrders"><i class="mdi mdi-format-list-bulleted"></i> Усі замовлення</a></li>
+                            <li><a class="effect-underline" asp-controller="Roles" asp-action="UserList"><i class="mdi mdi-account-group"></i> Усі користувачі</a></li>
+                            <li><a class="effect-underline" asp-controller="Roles" asp-action="Index"><i class="mdi mdi-account-key-outline"></i> Ролі</a></li>
+                            <li><a class="effect-underline" asp-controller="MusicalInstrument" asp-action="Create"><i class="mdi mdi-plus-box"></i> Додати товар</a></li>
+                            <li><a class="effect-underline" asp-controller="MICategory" asp-action="Add"><i class="mdi mdi-clipboard-plus"></i> Додати категорію</a></li>
+                        </ul>
+
+                    }
+
+                }
+
+
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+
+        <nav id="navbar" class="navbar navbar-expand-lg shadow-lg">
+
+            <button type="submit" class="btn btn-inverse-danger btn-icon">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"> <i class="mdi mdi-sort-variant"></i></a>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-4">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="effect-underline nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout (@User.Identity.Name)</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="effect-underline nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="effect-underline nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </nav>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="content">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+    <script src="~/js/bootstrap.min.js"></script>сс
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+        //* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+
+
+        $(window).on('load', function () {
+            $(".loader").fadeOut(1000);
+            $(".content").fadeIn(1000);
+        });
+    </script>
+    <script>
+
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+
+    </script>
+</body>
+</html>

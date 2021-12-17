@@ -1,0 +1,90 @@
+﻿@model MusicalInstrumentListViewModel
+
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong> @TempData["AlertMessage"]
+    </div>
+}
+
+<h2 class="text-center" style="text-shadow: 2px 2px 8px #676767;">Список всіх товарів</h2>
+
+<form asp-action="Index" method="get">
+    <div class="input-group">
+        <input type="text" name="searchString" id="searchString" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon2" />
+        <div class="input-group-append form-control">
+            @Html.DropDownListFor(x => Model.categoryId, new SelectList(Model.categories, "Value", "Text"), htmlAttributes: new { @class = "form-control text-dark" })
+            <span asp-validation-for="categoryId" style="display:none;"></span>
+        </div>
+        <span class="input-group-text border-0">
+            <button type="submit" class="btn btn-secondary form-control">
+                <i class="mdi mdi-search-web"></i>
+            </button>
+        </span>
+    </div>
+
+
+</form>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+
+
+        @{
+            foreach (var musicalinstrument in Model.ListMusicalInstruments)
+            {
+
+                @if (musicalinstrument.quantity != 0 && musicalinstrument.IsDeleted == false)
+                {
+
+                    <div class="col-md-5 d-flex align-items-stretch">
+                        <div class="card mb-4 box-shadow shadow-lg">
+                            <p class="card-header"><b>Назва: </b> @musicalinstrument.nameMI</p>
+                            <div class="card-img-wrap">
+                                <img class="card-img-top" src="@musicalinstrument.img" alt="Photo" style="width: 100%; height: 20vw; object-fit: cover;" />
+                            </div>
+
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <p class="card-text"><b>Опис: </b> @musicalinstrument.descMI</p>
+                                    <p><b>Кількість: </b>@musicalinstrument.quantity</p>
+                                    <p><b>Ціна: </b> @musicalinstrument.price.ToString("c")</p>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-secondary" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@musicalinstrument.Id"><i class="mdi mdi-cart-arrow-down"></i> Додати в корзину</a>
+                                <a class="dropdown justify-content-end">
+                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></a>
+
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li>
+                                            <form class="dropdown-item">
+
+                                                <a class="btn btn-inverse-danger btn-icon" asp-controller="MusicalInstrument" asp-action="Edit" asp-route-id="@musicalinstrument.Id"><i class="mdi mdi-pencil-circle-outline"></i> Редагувати</a>
+                                            </form>
+                                        </li>
+                                        <li>
+                                            <form class="dropdown-item" method="post" asp-action="Delete" asp-route-miId="@musicalinstrument.Id">
+                                                <button type="submit" class="btn btn-inverse-danger btn-icon">
+                                                    <i class="mdi mdi-delete"></i> Видалити товар
+                                                </button>
+
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </a>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                }
+            }
+        }
+    </div>
+
+</div>

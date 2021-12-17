@@ -1,0 +1,57 @@
+.card-img-wrap {
+    overflow: hidden;
+    position: relative;
+}
+
+    .card-img-wrap:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255,255,255,0.3);
+        opacity: 0;
+        transition: opacity .25s;
+    }
+
+    .card-img-wrap img {
+        transition: transform .25s;
+        width: 100%;
+    }
+
+    .card-img-wrap:hover img {
+        transform: scale(1.2);
+    }
+
+    .card-img-wrap:hover:after {
+        opacity: 1;
+    }
+
+
+/* Bootstrap 4 text input with search icon */
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+.form-control {
+    width: 100%;
+}
+
+h2 {
+    font-family: 'Lobster', sans-serif;
+    font-size: 50px;
+}

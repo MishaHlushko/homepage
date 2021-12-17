@@ -1,0 +1,31 @@
+﻿@model OrderViewModel;
+
+
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-lg">
+                <div class="card-body p-4">
+                    <h2 class="h4 text-center">Зміна статусу замовлення</h2>
+                    <form method="post" class="form-sample" asp-controller="Order" asp-action="EditStatusOrder">
+                        <div class="form-group">
+                            <label class="mb-2" asp-for="statusOrderId">Статус: </label>
+                            <div class="mb-4">
+                                @Html.DropDownListFor(x => Model.statusOrderId, new SelectList(Model.statusOrders, "Value", "Text"), htmlAttributes: new { @class = "form-control form-control-sm text-dark" })
+                                <span asp-validation-for="statusOrderId"></span>
+                            </div>
+                        </div>
+
+
+                        <button class="btn btn-secondary me-2" type="submit"><i class="mdi mdi-pencil"></i> Зберегти</button>
+                        <a class="btn btn-light" href="/Order/AllOrders"><i class="mdi mdi-pencil-remove"></i> Скасувати</a>
+                    </form>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

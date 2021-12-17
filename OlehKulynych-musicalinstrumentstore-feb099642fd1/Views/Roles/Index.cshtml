@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
+
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong> @TempData["AlertMessage"]
+    </div>
+}
+
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-lg">
+                <div class="card-body p-4">
+                    <h2 class="h4 text-center">Список ролей</h2>
+                    <table class="table">
+                        @foreach (var role in Model)
+                        {
+                            <tr class="d-flex">
+                                <td class="col-9">@role.Name</td>
+                                <td class="col-3">
+                                    <form asp-action="Delete" asp-route-id="@role.Id" method="post">
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" class="btn btn-sm btn-danger">
+                                            <i class="mdi mdi-delete"></i>
+                                        </button>
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Підтвердження видалення</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Дійсно видалити категорію?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="mdi mdi-close-circle-outline"></i>Скасувати</button>
+                                                        <button type="submit" class="btn btn-danger"><i class="mdi mdi-delete"></i>Видалити</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+
+                </div>
+                <div class="card-footer">
+                    <a asp-action="Create" class="btn btn-dark me-3"><i class="mdi mdi-plus-box-outline"></i></a>
+                    <a asp-action="UserList" class="btn btn-outline-dark"><i class="mdi mdi-format-list-bulleted"></i>Список користувачів</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

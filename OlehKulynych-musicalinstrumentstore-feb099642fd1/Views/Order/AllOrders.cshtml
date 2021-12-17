@@ -1,0 +1,109 @@
+﻿@model OrderListViewModel;
+
+
+
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-6">
+            <div class="card shadow-lg" style="border-radius: 1rem;">
+                <div class="card-body p-4">
+
+                    <h2 class="text-center mb-4">Всі замовлення</h2>
+                    <form asp-action="AllOrders" method="get">
+
+                        <div class="input-group mb-4">
+
+                            <div class="input-group-append form-control">
+                                @Html.DropDownListFor(x => Model.statusOrderId, new SelectList(Model.statusOrders, "Value", "Text"), htmlAttributes: new { @class = "form-control text-dark" })
+                                <span asp-validation-for="statusOrderId" style="display:none;"></span>
+                            </div>
+                            <span class="input-group-text border-0">
+                                <button type="submit" class="btn btn-secondary form-control">
+                                    <i class="mdi mdi-search-web"></i>
+                                </button>
+                            </span>
+                        </div>
+
+                        @foreach (var el in Model.orders)
+                        {
+
+                            if (el.orderDetails.Count() != 0)
+                            {
+                                int totalPrice = 0;
+                                <div class="card mb-3">
+                                    <div class="card-header">
+
+                                        <div class="row">
+                                            <strong class="col-sm-auto">
+                                                ID:
+                                            </strong>
+                                            <p class="col-sm-auto">@el.Id</p>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <strong>
+                                                ПІБ:
+                                            </strong>
+                                            <p> @el.surnameClient  @el.nameClient</p>
+                                        </div>
+                                        <div class="row">
+                                            <strong>
+                                                Статус:
+                                            </strong>
+                                            <p>@el.StatusOrder.statusName</p>
+                                        </div>
+                                        <div class="row">
+                                            <strong>
+                                                Час замовлення:
+                                            </strong>
+                                            <p> @el.orderTime.ToString("dd/MM/yyyy")</p>
+                                        </div>
+                                        <hr class="my-4">
+                                        @foreach (var m in el.orderDetails)
+                                        {
+                                            <div class="row">
+                                                <strong>
+                                                    Товар:
+                                                </strong>
+                                                <p> @m.musicalInstrument.nameMI</p>
+                                            </div>
+                                            <div class="row">
+                                                <strong>
+                                                    Ціна:
+                                                </strong>
+                                                <p> @m.musicalInstrument.price.ToString("c")</p>
+                                            </div>
+                                            <hr class="my-4">
+                                            totalPrice += m.musicalInstrument.price;
+
+
+                                        }
+
+                                        <div class="row">
+                                            <strong class="col-sm-auto">
+                                                Загальна ціна:
+                                            </strong>
+                                            <p class="col-sm-auto"> @totalPrice.ToString("c")</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="d-grid gap-2">
+                                            <button asp-controller="Order" asp-action="EditStatusOrder" asp-route-id="@el.Id" class="btn btn-secondary" type="submit"><i class="mdi mdi-pencil-circle-outline"></i> Змінити статус</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            }
+
+                        }
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

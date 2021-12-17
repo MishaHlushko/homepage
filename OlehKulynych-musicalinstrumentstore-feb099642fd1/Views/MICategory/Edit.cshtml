@@ -1,0 +1,31 @@
+﻿@model MICategoryViewModel;
+
+
+
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-lg">
+                <div class="card-body p-4">
+                    <h2 class="h4 text-center">Редагувати категорію</h2>
+                    <form method="post" class="form-sample" asp-controller="MICategory" asp-action="Edit">
+                        <div>
+
+                            <label class="mb-2" asp-for="categoryName">Назва: </label>
+                            <input type="text" asp-for="categoryName" id="categoryName" class="form-control mb-4">
+                            <span asp-validation-for="categoryName"></span>
+
+                        </div>
+
+
+                        <button class="btn btn-secondary me-2" type="submit"><i class="mdi mdi-pencil"></i> Зберегти</button>
+                        <a class="btn btn-light" href="/MICategory/Index"><i class="mdi mdi-pencil-remove"></i> Скасувати</a>
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

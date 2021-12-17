@@ -1,0 +1,85 @@
+﻿@model Musical_Instrument_Store.Data.Models.Order
+
+
+
+
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-lg" style="border-radius: 1rem;">
+                <div class="card-body p-5">
+
+                    <h2 class="text-center mb-5">Оформлення замовлення</h2>
+                    <form asp-action="Index" method="post" class="form-horizontal">
+
+                        <div class="form-group mb-3">
+                            <label asp-for="nameClient"></label>
+                            <div>
+                                <input asp-for="nameClient" class="form-control" />
+                                <span asp-validation-for="nameClient" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="surnameClient"></label>
+                            <div>
+                                <input asp-for="surnameClient" class="form-control" />
+                                <span asp-validation-for="surnameClient" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="addressClient"></label>
+                            <div>
+                                <input asp-for="addressClient" class="form-control" />
+                                <span asp-validation-for="addressClient" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="phoneClient"></label>
+                            <div>
+                                <input asp-for="phoneClient" class="form-control" />
+                                <span asp-validation-for="phoneClient" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="emailClient"></label>
+                            <div>
+                                <input asp-for="emailClient" class="form-control" />
+                                <span asp-validation-for="emailClient" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"  type="button">Завершити замовлення</button>
+                        </div>
+
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">Підтвердження замовлення</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Всі дані введено вірно?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="mdi mdi-close-circle-outline"></i>Ні</button>
+                                        <button type="submit" class="btn btn-success"><i class="mdi mdi-check-decagram"></i>Так</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
